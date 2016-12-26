@@ -1,0 +1,11 @@
+.avatar {
+  width: 300px;
+  height: 300px;
+  margin: 50px auto;
+
+  background: url('http://7xr2s7.com1.z0.glb.clouddn.com/avatar.jpg');
+  background-size: contain;
+
+  transition: all .3s linear;
+  transform-origin: 50%;
+}
