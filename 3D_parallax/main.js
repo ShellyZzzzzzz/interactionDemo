@@ -1,15 +1,18 @@
 window.onload = function() {
+    var move = 'ontouchmove' in document ? 'touchmove' : 'mousemove' ;
   
     let el = document.querySelector('.avatar');
 
-    el.addEventListener('mousemove', (e) => {
+    el.addEventListener(move, (e) => {
+
         let thisPX = el.getBoundingClientRect().left;
         let thisPY = el.getBoundingClientRect().top;
         let boxWidth = el.getBoundingClientRect().width;
         let boxHeight = el.getBoundingClientRect().height;
 
-        let mouseX = e.pageX - thisPX;
-        let mouseY = e.pageY - thisPY;
+        var ev = 'ontouchmove' in document ? e.touches[0] : e ;
+        let mouseX = ev.pageX - thisPX;
+        let mouseY = ev.pageY - thisPY;
         let X;
         let Y;
 
