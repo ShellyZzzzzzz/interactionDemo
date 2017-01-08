@@ -1,0 +1,13 @@
+body {
+	height: 2000px;
+	margin: 0;
+}
+
+.progress-indicator {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 5px;
+	/*width: 100px;*/
+	background-color: #0A74DA;	
+}
