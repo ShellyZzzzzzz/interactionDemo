@@ -5,5 +5,14 @@
 ## gradual_imgload
 刷知乎时发现知乎采用了一种新的图片加载方式，图片在加载时会由模糊到清晰，此模块实现了类似功能。
 
+## pre_imgload
+简单的图片预加载实现。核心代码为
+``` javascript
+var imgObj = new Image();
+$(imgObj).on('load error', function () {
+
+});
+imgObj.src = src;
+```
 ## progress_indicator
 在学习阮一峰老师的ES6入门时，无意中发现页面顶部进度条的交互，模仿实现了一个。原理简单，无需赘述。
