@@ -22,7 +22,6 @@ for (var i = imgs.length - 1; i >= 0; i--) {
 
 function loadImg () {
     $progress.innerHTML = Math.round((++count) / len * 100) + '%';
-
     if (count === len) {
         document.querySelector('.loading').style.display = 'none';
     }
