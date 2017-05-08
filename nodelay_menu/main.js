@@ -19,6 +19,20 @@ window.onload = function () {
         }
     };
 
+    var replaceActiveContent = function (target) {
+        if (activeRow) { // 已有选中的一级菜单时
+            // 取消原有的选中项
+            activeRow.classList.remove('active');
+            activeMenu.classList.remove('active');
+        }
+
+        // 替换新的选中项
+        activeRow = target;
+        activeRow.classList.add('active');
+        activeMenu = document.getElementById(activeRow.dataset.id);
+        activeMenu.classList.add('active');
+    };
+
     // test之动态添加元素的事件绑定
     // var data = ['家用电器', '数码产品', '家居家装', '服饰美妆', '食品生鲜'];
     // var menuUl = menu.querySelector('ul');
@@ -43,24 +57,20 @@ window.onload = function () {
             var curMousePos = mouseTrack[mouseTrack.length - 1];
             var prevMousePos = mouseTrack[mouseTrack.length - 2];
 
-            timer = setTimeout(function () { // 当鼠标滑动li时 延迟300ms
-                if (mouseInSub) { // 当300ms后 鼠标已在二级菜单上
-                    return; // 直接返回 不做菜单切换
-                }
-                if (activeRow) { // 已有选中的一级菜单时
-                    // 取消原有的选中项
-                    activeRow.classList.remove('active');
-                    activeMenu.classList.remove('active');
-                }
+            var delay = needDelay(subMenu, prevMousePos, curMousePos);
+            console.log(delay);
+            if (delay) {
+                timer = setTimeout(function () { // 当鼠标滑动li时 延迟300ms
+                    if (mouseInSub) { // 当300ms后 鼠标已在二级菜单上
+                        return; // 直接返回 不做菜单切换
+                    }
+                    replaceActiveContent(target);
 
-                // 替换新的选中项
-                activeRow = target;
-                activeRow.classList.add('active');
-                activeMenu = document.getElementById(activeRow.dataset.id);
-                activeMenu.classList.add('active');
-
-                timer = null; // 去抖
-            }, 300);
+                    timer = null; // 去抖
+                }, 300);
+            } else {
+                replaceActiveContent(target);
+            }
         }
     // 这里利用事件捕获机制 由外向内传递事件 若利用冒泡则无法在此监听中获取到内层li的鼠标事件
     }, true);
@@ -83,7 +93,7 @@ window.onload = function () {
 
     // 根据子菜单的鼠标事件修改mouseInSub标识
     subMenu.addEventListener('mouseenter', function () {
-       mouseInSub = true;
+        mouseInSub = true;
     });
     subMenu.addEventListener('mouseleave', function () {
         mouseInSub = false;
